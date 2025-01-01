@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise #6: Content show/hide</title>
+    <style>
+        * {
+            font-family: Georgia, serif;
+        }
+
+        article {
+            width: 400px;
+            border: 1px solid grey;
+            background-color: #ececec;
+            position: relative;
+            margin: 5px;
+        }
+
+        article h2 {
+            margin: 0px;
+            padding: 10px;
+            font-size: 1.5em;
+        }
+
+        article .showlink {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: blue;
+        }
+
+        article .text {
+            display: none; /* Initially hidden */
+            background-color: white;
+            padding: 10px;
+            font-family: Verdana, sans-serif;
+            font-size: 0.9em;
+            color: #a9a9a9;
+        }
+    </style>
+</head>
+<body>
+
+<article>
+    <h2>What is lorem ipsum?</h2>
+    <div id="p1_show" class="showlink">Show</div>
+    <div id="p1_text" class="text">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+        <p><a href="#" class="hide-link">Hide</a></p>
+    </div>
+</article>
+
+<article>
+    <h2>Why do we use it?</h2>
+    <div id="p2_show" class="showlink">Show</div>
+    <div id="p2_text" class="text">
+        <p>It is a long established fact that a reader will be distracted by the readable content...</p>
+        <p><a href="#" class="hide-link">Hide</a></p>
+    </div>
+</article>
+
+<article>
+    <h2>Where does it come from?</h2>
+    <div id="p3_show" class="showlink">Show</div>
+    <div id="p3_text" class="text">
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text...</p>
+        <p><a href="#" class="hide-link">Hide</a></p>
+    </div>
+</article>
+
+<script>
+    // Select all show and hide elements
+    const articles = document.querySelectorAll("article");
+
+    articles.forEach(article => {
+        const showLink = article.querySelector(".showlink");
+        const textDiv = article.querySelector(".text");
+        const hideLink = textDiv.querySelector(".hide-link");
+
+        // Show content
+        showLink.addEventListener("click", () => {
+            textDiv.style.display = "block";
+            showLink.style.display = "none";
+        });
+
+        // Hide content
+        hideLink.addEventListener("click", (e) => {
+            e.preventDefault(); // Prevent default link action
+            textDiv.style.display = "none";
+            showLink.style.display = "block";
+        });
+    });
+</script>
+
+</body>
+</html>

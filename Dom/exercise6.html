@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise #7: Simple Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 5px 10px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <p>Enter a song name and click "Add Song" to add it to the playlist. Each item will include a delete button.</p>
+
+    <form>
+        <input type="text" id="songTextInput" size="40" placeholder="Song name">
+        <input type="button" id="addButton" value="Add Song">
+    </form>
+
+    <ul id="playlist"></ul>
+
+    <script>
+        var txtInput = document.getElementById("songTextInput");
+        var btn = document.getElementById("addButton");
+        var playlist = document.getElementById("playlist");
+
+        btn.addEventListener("click", function () {
+            // Validate input
+            if (txtInput.value.trim().length >= 1) {
+                // Create a new list item
+                var newSong = document.createElement("li");
+                newSong.textContent = txtInput.value;
+
+                // Create a delete button
+                var delBtn = document.createElement("button");
+                delBtn.textContent = "Delete";
+
+                // Append the delete button to the list item
+                newSong.appendChild(delBtn);
+
+                // Add the list item to the playlist
+                playlist.appendChild(newSong);
+
+                // Clear the input field
+                txtInput.value = "";
+
+                // Add event listener to the delete button
+                delBtn.addEventListener("click", function () {
+                    playlist.removeChild(newSong); // Remove the list item
+                });
+            } else {
+                alert("Please enter a song name!"); // Show alert for invalid input
+            }
+        });
+    </script>
+</body>
+</html>

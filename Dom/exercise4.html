@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise #5: Password Validation</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+        }
+
+        .err {
+            color: red;
+            font-size: 0.7em;
+        }
+    </style>
+</head>
+<body>
+    <form name="pw">
+        <table>
+            <tr>
+                <td>Password (min 6 characters):</td>
+                <td><input type="password" name="password1" id="password1" size="20" placeholder="Password"></td>
+                <td>
+                    <div id="pw1_check" class="err"></div>
+                </td>
+            </tr>
+            <td>Repeat password:</td>
+                <td><input type="password" name="password2" id="password2" size="20" placeholder="Repeat Password"></td>
+                <td>
+                    <div id="pw2_check" class="err"></div>
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Submit" id="submitBtn"/>
+    </form>
+
+    <script>
+        // Select input fields and error message elements
+        const pass = document.getElementById("password1");
+        const pass2 = document.getElementById("password2");
+        const passMsg = document.getElementById("pw1_check");
+        const passMsg2 = document.getElementById("pw2_check");
+
+        document.forms[0].onsubmit = function (event) {
+            let valid = true;
+
+            // Clear previous error messages
+            passMsg.textContent = "";
+            passMsg2.textContent = "";
+
+            // Check password length
+            if (pass.value.length < 6) {
+                passMsg.textContent = "Password must be at least 6 characters.";
+                valid = false;
+            }
+
+            // Check password match
+            if (pass.value !== pass2.value) {
+                passMsg2.textContent = "Passwords do not match.";
+                valid = false;
+            }
+
+            // Prevent form submission if validation fails
+            if (!valid) {
+                event.preventDefault();
+            }
+        };
+    </script>
+</body>
+</html>
